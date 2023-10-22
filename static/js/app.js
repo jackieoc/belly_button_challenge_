@@ -1,6 +1,7 @@
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
-d3.json(url).then(function(error, data) {
+d3.json(url, function(error, data) {
+  if (error) throw error;
   console.log(data);
 });
 
@@ -8,7 +9,8 @@ d3.json(url).then(function(error, data) {
 function init() {
   let dropdownMenu = d3.select("#selDataset");
 
-  d3.json(url).then((data) => {
+  d3.json(url, function(error, data) {
+      if (error) throw error;
       let names = data.names;
       names.forEach((id) => {
           console.log(id);
@@ -18,7 +20,7 @@ function init() {
 
       let newData = names[0];
       console.log(newData);
-      createScatter(newData);
+      // createScatter(newData);
       createBar(newData);
       createSummary(newData);
 
@@ -26,7 +28,8 @@ function init() {
 };
 
 function createBar(bar) {
-  d3.json(url).then((data) => {
+  d3.json(url, function(error, data) {
+      if (error) throw error;
 
       let sampleInfo = data.samples;
       let value = sampleInfo.filter(result => result.id == bar);
@@ -54,8 +57,9 @@ function createBar(bar) {
 };
 
 function createBubble(bubble) {
-  d3.json(url).then((data) => {
-      
+  d3.json(url, function(error, data) {
+      if (error) throw error;
+
       let sampleInfo = data.samples;
       let value = sampleInfo.filter(result => result.id == bubble);
       let valueData = value[0];
@@ -85,7 +89,8 @@ function createBubble(bubble) {
 };
 
 function createSummary(summary) {
-  d3.json(url).then((data) => {
+  d3.json(url, function(error, data) {
+      if (error) throw error;
 
       let metadata = data.metadata;
       let value = metadata.filter(result => result.id == summary);
